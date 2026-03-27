@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Mubasher Chaudhary — Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,6 +25,8 @@ html { scroll-behavior: smooth; }
   --purple: #a855f7;
   --teal: #2dd4bf;
   --r: 20px;
+  --transition-fast: 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  --transition-smooth: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
 body {
@@ -33,22 +36,24 @@ body {
   overflow-x: hidden;
   line-height: 1.65;
   font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Background */
-.bg-scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.25; }
+/* Background - optimized */
+.bg-scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; will-change: transform; }
+.blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.25; will-change: transform; }
 .b1 { width: 700px; height: 700px; background: radial-gradient(circle, #3b4fd4, transparent 70%); top: -200px; left: -100px; animation: d1 20s ease-in-out infinite alternate; }
 .b2 { width: 600px; height: 600px; background: radial-gradient(circle, #7c3aed, transparent 70%); top: 200px; right: -150px; animation: d2 24s ease-in-out infinite alternate; }
 .b3 { width: 500px; height: 500px; background: radial-gradient(circle, #0e7490, transparent 70%); bottom: -80px; left: 35%; animation: d1 16s ease-in-out infinite alternate; }
-@keyframes d1 { to { transform: translate(50px,40px) scale(1.07); } }
-@keyframes d2 { to { transform: translate(-45px,30px) scale(1.05); } }
+@keyframes d1 { to { transform: translate(30px,25px) scale(1.05); } }
+@keyframes d2 { to { transform: translate(-30px,20px) scale(1.03); } }
 
-/* Nav */
+/* Nav - fully responsive */
 nav {
   position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
-  z-index: 999; display: flex; align-items: center;
-  background: rgba(12,12,20,0.65);
+  z-index: 999; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(12,12,20,0.75);
   backdrop-filter: blur(40px) saturate(200%);
   -webkit-backdrop-filter: blur(40px) saturate(200%);
   border: 1px solid var(--gb);
@@ -56,19 +61,20 @@ nav {
   padding: 7px 7px 7px 22px;
   width: min(700px, calc(100vw - 32px));
   box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+  transition: all 0.3s ease;
 }
-.nav-logo { font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.01em; flex-shrink: 0; }
+.nav-logo { font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
 .nav-links { display: flex; align-items: center; gap: 0; list-style: none; margin: 0 auto; padding: 0 0.5rem; }
-.nav-links a { color: var(--t2); text-decoration: none; font-size: 0.925rem; font-weight: 500; padding: 6px 13px; border-radius: 100px; transition: all 0.2s; }
+.nav-links a { color: var(--t2); text-decoration: none; font-size: 0.925rem; font-weight: 500; padding: 6px 13px; border-radius: 100px; transition: all var(--transition-fast); white-space: nowrap; }
 .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.07); }
-.nav-hire { background: var(--text); color: #0a0a0f; font-size: 0.9rem; font-weight: 700; padding: 9px 20px; border-radius: 100px; text-decoration: none; flex-shrink: 0; transition: all 0.2s; }
+.nav-hire { background: var(--text); color: #0a0a0f; font-size: 0.9rem; font-weight: 700; padding: 9px 20px; border-radius: 100px; text-decoration: none; transition: all var(--transition-fast); white-space: nowrap; }
 .nav-hire:hover { background: #d1d1d6; transform: scale(0.97); }
 
 /* Layout */
-.wrap { max-width: 1160px; margin: 0 auto; padding: 0 5vw; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 5vw; width: 100%; }
 section { padding: 5rem 0; position: relative; z-index: 1; }
 .sec-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; color: var(--t2); letter-spacing: 0.07em; text-transform: uppercase; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); padding: 5px 14px; border-radius: 100px; backdrop-filter: blur(12px); margin-bottom: 1rem; }
-.sec-title { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.7rem; }
+.sec-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.7rem; }
 .sec-sub { color: var(--t2); font-size: 1.05rem; max-width: 480px; margin-bottom: 2.8rem; line-height: 1.78; }
 
 /* Glass card */
@@ -79,36 +85,36 @@ section { padding: 5rem 0; position: relative; z-index: 1; }
   border: 1px solid var(--gb);
   border-radius: var(--r);
   box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
-  transition: all 0.3s ease;
+  transition: all var(--transition-smooth);
 }
-.gc:hover { background: var(--glass-h); border-color: var(--gb-h); }
+.gc:hover { background: var(--glass-h); border-color: var(--gb-h); transform: translateY(-2px); }
 
-/* Hero */
+/* Hero - fully responsive */
 #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 90px; }
-.hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(45,212,191,0.1); border: 1px solid rgba(45,212,191,0.22); border-radius: 100px; padding: 6px 14px 6px 8px; font-size: 0.88rem; font-weight: 500; color: var(--teal); margin-bottom: 1.8rem; width: fit-content; animation: fu 0.8s 0.1s both; }
+.hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(45,212,191,0.1); border: 1px solid rgba(45,212,191,0.22); border-radius: 100px; padding: 6px 14px 6px 8px; font-size: 0.88rem; font-weight: 500; color: var(--teal); margin-bottom: 1.8rem; width: fit-content; animation: fu 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.1s both; }
 .ldot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); animation: lp 2.5s ease infinite; }
 @keyframes lp { 0% { box-shadow: 0 0 0 0 rgba(45,212,191,0.45); } 60% { box-shadow: 0 0 0 7px rgba(45,212,191,0); } 100% { box-shadow: 0 0 0 0 rgba(45,212,191,0); } }
-.hero-name { font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; margin-bottom: 1.4rem; animation: fu 0.9s 0.2s both; }
+.hero-name { font-size: clamp(3rem, 9vw, 8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; margin-bottom: 1.4rem; animation: fu 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.2s both; }
 .hero-name .dim { color: var(--t2); font-weight: 300; }
-.hero-desc { font-size: 1.22rem; color: var(--t2); max-width: 480px; line-height: 1.78; margin-bottom: 2.5rem; animation: fu 0.9s 0.33s both; }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; animation: fu 0.9s 0.44s both; }
-.btn-main { background: var(--text); color: #0a0a0f; font-size: 0.95rem; font-weight: 700; padding: 13px 28px; border-radius: 100px; text-decoration: none; transition: all 0.22s; font-family: inherit; }
+.hero-desc { font-size: clamp(1rem, 4vw, 1.22rem); color: var(--t2); max-width: 480px; line-height: 1.78; margin-bottom: 2.5rem; animation: fu 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.33s both; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; animation: fu 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.44s both; }
+.btn-main { background: var(--text); color: #0a0a0f; font-size: 0.95rem; font-weight: 700; padding: 13px 28px; border-radius: 100px; text-decoration: none; transition: all var(--transition-fast); font-family: inherit; display: inline-block; }
 .btn-main:hover { background: #e0e0e5; transform: scale(0.98); }
-.btn-ghost { font-size: 0.95rem; font-weight: 500; color: var(--t2); padding: 13px 28px; border-radius: 100px; text-decoration: none; transition: all 0.22s; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); }
+.btn-ghost { font-size: 0.95rem; font-weight: 500; color: var(--t2); padding: 13px 28px; border-radius: 100px; text-decoration: none; transition: all var(--transition-fast); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); display: inline-block; }
 .btn-ghost:hover { color: var(--text); background: rgba(255,255,255,0.09); }
-.hero-stats { display: flex; gap: 2px; margin-top: 4rem; animation: fu 0.9s 0.55s both; }
-.stat-g { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.09); padding: 18px 26px; flex: 1; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+.hero-stats { display: flex; gap: 2px; margin-top: 4rem; animation: fu 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.55s both; flex-wrap: wrap; }
+.stat-g { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.09); padding: 18px 26px; flex: 1; min-width: 120px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
 .stat-g:first-child { border-radius: 18px 5px 5px 18px; }
 .stat-g:last-child { border-radius: 5px 18px 18px 5px; }
 .stat-g:not(:first-child):not(:last-child) { border-radius: 5px; }
-.sn { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+.sn { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
 .sl { font-size: 0.82rem; color: var(--t3); font-weight: 500; margin-top: 2px; }
 @keyframes fu { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
-/* About */
-.about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: start; }
-.av-card { padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
-.av-circle { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(168,85,247,0.3)); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; font-weight: 800; }
+/* About - fully responsive */
+.about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start; }
+.av-card { padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.av-circle { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(168,85,247,0.3)); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; }
 .av-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
 .av-title { font-size: 0.9rem; color: var(--t2); }
 .av-status { display: flex; align-items: center; gap: 7px; font-size: 0.85rem; color: var(--teal); font-weight: 500; background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.18); padding: 5px 14px; border-radius: 100px; }
@@ -116,24 +122,24 @@ section { padding: 5rem 0; position: relative; z-index: 1; }
 .ab-info p { color: var(--t2); font-size: 1.03rem; line-height: 1.8; margin-bottom: 1rem; }
 .ab-info p strong { color: var(--text); font-weight: 600; }
 .stags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1.4rem; }
-.stag { font-size: 0.85rem; font-weight: 500; color: var(--t2); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); padding: 5px 14px; border-radius: 100px; transition: all 0.2s; cursor: default; }
+.stag { font-size: 0.85rem; font-weight: 500; color: var(--t2); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); padding: 5px 14px; border-radius: 100px; transition: all var(--transition-fast); cursor: default; }
 .stag:hover { color: var(--text); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
 
-/* Projects */
+/* Projects - responsive grid */
 .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.8rem; }
-.fb { font-size: 0.82rem; font-weight: 600; color: var(--t2); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(16px); padding: 7px 18px; border-radius: 100px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+.fb { font-size: 0.82rem; font-weight: 600; color: var(--t2); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(16px); padding: 7px 18px; border-radius: 100px; cursor: pointer; transition: all var(--transition-fast); font-family: inherit; }
 .fb.active, .fb:hover { background: var(--text); color: #0a0a0f; border-color: transparent; }
-.pg { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; }
-.pc { display: flex; flex-direction: column; transition: all 0.3s; }
+.pg { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.pc { display: flex; flex-direction: column; transition: all var(--transition-smooth); }
 .pc:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(0,0,0,0.35) !important; }
-.pc-top { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.pc-top { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
 .p-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .ptag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em; padding: 3px 10px; border-radius: 100px; }
 .tai { background: rgba(45,212,191,0.12); color: var(--teal); border: 1px solid rgba(45,212,191,0.2); }
 .tfs { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
 .tnew { background: rgba(168,85,247,0.12); color: #c084fc; border: 1px solid rgba(168,85,247,0.2); }
 .p-links { display: flex; gap: 6px; }
-.pib { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--t2); font-size: 13px; transition: all 0.2s; }
+.pib { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--t2); font-size: 13px; transition: all var(--transition-fast); }
 .pib:hover { background: rgba(255,255,255,0.1); color: var(--text); }
 .pc-body { padding: 14px 20px 20px; flex: 1; display: flex; flex-direction: column; }
 .pc-num { font-size: 0.76rem; color: var(--t3); font-family: 'Geist Mono', monospace; margin-bottom: 5px; }
@@ -142,9 +148,9 @@ section { padding: 5rem 0; position: relative; z-index: 1; }
 .pc-stack { display: flex; flex-wrap: wrap; gap: 5px; }
 .pc-stack span { font-size: 0.74rem; font-family: 'Geist Mono', monospace; color: var(--t3); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 2px 8px; border-radius: 5px; }
 
-/* Certs */
-.cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-.cc { overflow: hidden; transition: all 0.3s; }
+/* Certs - responsive */
+.cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.cc { overflow: hidden; transition: all var(--transition-smooth); }
 .cc:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(0,0,0,0.35) !important; }
 .cc-top { height: 108px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 .ct1 { background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(37,99,235,0.06)); }
@@ -160,34 +166,34 @@ section { padding: 5rem 0; position: relative; z-index: 1; }
 .c-issuer { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--t3); margin-bottom: 5px; }
 .c-name { font-size: 1.02rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; color: var(--text); }
 .c-desc { font-size: 0.9rem; color: var(--t2); line-height: 1.68; margin-bottom: 14px; }
-.c-foot { display: flex; justify-content: space-between; align-items: center; }
+.c-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
 .c-date { font-size: 0.78rem; font-family: 'Geist Mono', monospace; color: var(--t3); }
-.c-link { font-size: 0.82rem; font-weight: 600; text-decoration: none; color: var(--blue); transition: opacity 0.2s; }
+.c-link { font-size: 0.82rem; font-weight: 600; text-decoration: none; color: var(--blue); transition: opacity var(--transition-fast); }
 .c-link:hover { opacity: 0.7; }
 
-/* Skills */
-.skg { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
-.skc { padding: 24px; transition: all 0.25s; }
+/* Skills - responsive */
+.skg { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.skc { padding: 24px; transition: all var(--transition-smooth); }
 .skc:hover { transform: translateY(-3px); }
 .sk-icon { font-size: 1.5rem; margin-bottom: 12px; }
 .sk-name { font-size: 1.02rem; font-weight: 700; margin-bottom: 4px; }
 .sk-desc { font-size: 0.87rem; color: var(--t2); line-height: 1.58; margin-bottom: 14px; }
 .sk-row { display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--t3); font-family: 'Geist Mono', monospace; margin-bottom: 5px; }
 .sk-track { height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
-.sk-bar { height: 100%; border-radius: 2px; animation: bi 1.4s ease both; }
+.sk-bar { height: 100%; border-radius: 2px; animation: bi 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) both; transform-origin: left; }
 .sb1 { background: linear-gradient(90deg,#3b82f6,#818cf8); }
 .sb2 { background: linear-gradient(90deg,#8b5cf6,#c084fc); }
 .sb3 { background: linear-gradient(90deg,#2dd4bf,#06b6d4); }
 .sb4 { background: linear-gradient(90deg,#f59e0b,#f97316); }
-@keyframes bi { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); } }
+@keyframes bi { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* Contact */
-.cw { display: grid; grid-template-columns: 1fr 1.1fr; gap: 16px; }
+/* Contact - fully responsive */
+.cw { display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; }
 .cl-card { padding: 34px; }
 .cl-card h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
 .cl-card p { color: var(--t2); font-size: 1rem; margin-bottom: 1.8rem; line-height: 1.75; }
 .clinks { display: flex; flex-direction: column; gap: 9px; }
-.clink { display: flex; align-items: center; gap: 13px; padding: 13px 15px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); text-decoration: none; color: var(--t2); transition: all 0.2s; }
+.clink { display: flex; align-items: center; gap: 13px; padding: 13px 15px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); text-decoration: none; color: var(--t2); transition: all var(--transition-fast); }
 .clink:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.13); color: var(--text); }
 .ci { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
 .ci1 { background: rgba(59,130,246,0.15); }
@@ -199,39 +205,79 @@ section { padding: 5rem 0; position: relative; z-index: 1; }
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
 .fg { display: flex; flex-direction: column; gap: 6px; }
 .flb { font-size: 0.82rem; font-weight: 600; color: var(--t2); }
-.fi, .ft { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 11px; padding: 12px 14px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text); outline: none; transition: all 0.2s; resize: none; }
+.fi, .ft { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 11px; padding: 12px 14px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text); outline: none; transition: all var(--transition-fast); resize: none; width: 100%; }
 .fi::placeholder, .ft::placeholder { color: var(--t3); }
 .fi:focus, .ft:focus { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); }
 .ft { min-height: 115px; }
-.fs-btn { align-self: flex-start; background: var(--text); color: #0a0a0f; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700; padding: 12px 26px; border-radius: 100px; border: none; cursor: pointer; transition: all 0.22s; }
+.fs-btn { align-self: flex-start; background: var(--text); color: #0a0a0f; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700; padding: 12px 26px; border-radius: 100px; border: none; cursor: pointer; transition: all var(--transition-fast); }
 .fs-btn:hover { background: #e0e0e5; transform: scale(0.98); }
 
 /* Footer */
-footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 0 3rem; display: flex; align-items: center; justify-content: space-between; }
+footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 0 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .fl { font-size: 0.9rem; font-weight: 700; color: var(--text); text-decoration: none; }
 .fc { font-size: 0.8rem; color: var(--t3); }
 .fsoc { display: flex; gap: 8px; }
-.fsb { width: 34px; height: 34px; border-radius: 9px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--t2); font-size: 13px; transition: all 0.2s; }
+.fsb { width: 34px; height: 34px; border-radius: 9px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--t2); font-size: 13px; transition: all var(--transition-fast); }
 .fsb:hover { background: rgba(255,255,255,0.09); color: var(--text); }
 
-/* Reveal */
-.rv { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+/* Reveal - smoother */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1); will-change: opacity, transform; }
 .rv.in { opacity: 1; transform: none; }
-.d1 { transition-delay: 0.08s; }
-.d2 { transition-delay: 0.16s; }
-.d3 { transition-delay: 0.24s; }
+.d1 { transition-delay: 0.05s; }
+.d2 { transition-delay: 0.1s; }
+.d3 { transition-delay: 0.15s; }
 
-@media(max-width:900px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .cw { grid-template-columns: 1fr; }
-  .frow { grid-template-columns: 1fr; }
+/* Responsive breakpoints - preserves all design */
+@media (max-width: 1024px) {
+  .wrap { padding: 0 4vw; }
+  .about-grid { grid-template-columns: 260px 1fr; gap: 18px; }
 }
-@media(max-width:700px) {
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .cw { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+  .frow { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .stat-g { min-width: 140px; }
+  .stat-g:first-child { border-radius: 18px 5px 5px 18px; }
+  .stat-g:last-child { border-radius: 5px 18px 18px 5px; }
+  section { padding: 4rem 0; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 5px 5px 5px 18px; width: calc(100vw - 24px); }
   .nav-links { display: none; }
-  .hero-stats { flex-direction: column; gap: 2px; }
-  .stat-g:first-child { border-radius: 14px 14px 5px 5px; }
-  .stat-g:last-child { border-radius: 5px 5px 14px 14px; }
-  .stat-g:not(:first-child):not(:last-child) { border-radius: 5px; }
+  .nav-hire { padding: 7px 16px; font-size: 0.85rem; }
+  .hero-stats { flex-wrap: wrap; gap: 4px; }
+  .stat-g { padding: 14px 20px; min-width: calc(50% - 2px); flex: auto; }
+  .stat-g:first-child, .stat-g:last-child { border-radius: 14px; }
+  .stat-g:not(:first-child):not(:last-child) { border-radius: 14px; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pg { grid-template-columns: 1fr; }
+  .cg { grid-template-columns: 1fr; }
+  .skg { grid-template-columns: 1fr; }
+  .cl-card, .cr-card { padding: 24px; }
+  .av-card { padding: 24px; }
+  .ab-info { padding: 24px; }
+}
+
+@media (max-width: 480px) {
+  .wrap { padding: 0 5vw; }
+  .hero-btns { flex-direction: column; width: 100%; }
+  .btn-main, .btn-ghost { text-align: center; width: 100%; }
+  .sec-sub { max-width: 100%; }
+  .hero-stats { grid-template-columns: 1fr; gap: 6px; }
+  .stat-g { border-radius: 14px !important; }
+  .filter-row { justify-content: center; }
+  .fb { padding: 6px 14px; font-size: 0.75rem; }
+  .cl-card h3 { font-size: 1.3rem; }
+  footer .wrap { flex-direction: column; text-align: center; justify-content: center; }
+  .fsoc { justify-content: center; }
+}
+
+/* Performance improvement - reduce paint */
+.gc, .pc, .cc, .skc, .clink, .btn-main, .btn-ghost, .nav-hire, .fb {
+  will-change: transform;
 }
 </style>
 </head>
@@ -243,7 +289,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   <div class="blob b3"></div>
 </div>
 
-<!-- Nav -->
 <nav>
   <a href="#" class="nav-logo">Mubasher.dev</a>
   <ul class="nav-links">
@@ -256,7 +301,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   <a href="#contact" class="nav-hire">Hire Me</a>
 </nav>
 
-<!-- Hero -->
 <section id="hero">
   <div class="wrap">
     <div class="hero-pill"><div class="ldot"></div>Open to opportunities</div>
@@ -275,7 +319,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   </div>
 </section>
 
-<!-- About -->
 <section id="about">
   <div class="wrap">
     <div class="sec-pill rv">✦ About</div>
@@ -310,7 +353,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   </div>
 </section>
 
-<!-- Projects -->
 <section id="projects">
   <div class="wrap">
     <div class="rv"><div class="sec-pill">✦ My Work</div></div>
@@ -321,78 +363,30 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
       <button class="fb" onclick="fp('fs',this)">Full Stack</button>
     </div>
     <div class="pg">
-
-      <div class="gc pc rv" data-type="ai">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span><span class="ptag tnew">New</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">01</div><div class="pc-name">NeuralChat — AI Conversation Engine</div><div class="pc-desc">GPT-4 powered chatbot with long-term memory, context compression, and real-time streaming. RAG pipelines for domain-specific knowledge bases.</div><div class="pc-stack"><span>LangChain</span><span>OpenAI</span><span>FastAPI</span><span>Pinecone</span><span>React</span></div></div>
-      </div>
-
-      <div class="gc pc rv d1" data-type="fs">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">02</div><div class="pc-name">DevFlow — SaaS Project Manager</div><div class="pc-desc">Full-featured project management SaaS with Kanban boards, real-time WebSocket collaboration, OAuth authentication, and Stripe billing.</div><div class="pc-stack"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Stripe</span><span>Prisma</span></div></div>
-      </div>
-
-      <div class="gc pc rv d2" data-type="ai">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">03</div><div class="pc-name">VisionAI — Image Analysis Platform</div><div class="pc-desc">Computer vision platform using CNN models for object detection and defect analysis. Scalable FastAPI backend with React analytics dashboard.</div><div class="pc-stack"><span>TensorFlow</span><span>OpenCV</span><span>FastAPI</span><span>React</span><span>AWS S3</span></div></div>
-      </div>
-
-      <div class="gc pc rv" data-type="fs">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span><span class="ptag tnew">New</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">04</div><div class="pc-name">ShopSmart — E-Commerce Platform</div><div class="pc-desc">High-performance e-commerce with AI-powered recommendations, dynamic pricing engine, and real-time inventory tracking at scale.</div><div class="pc-stack"><span>Next.js</span><span>Node.js</span><span>MongoDB</span><span>Redis</span><span>Docker</span></div></div>
-      </div>
-
-      <div class="gc pc rv d1" data-type="ai">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">05</div><div class="pc-name">SentimentPulse — NLP Analytics</div><div class="pc-desc">Real-time sentiment analysis processing social feeds using fine-tuned BERT. Dashboard with live trend visualization and intelligent alerting.</div><div class="pc-stack"><span>HuggingFace</span><span>BERT</span><span>Kafka</span><span>Python</span><span>D3.js</span></div></div>
-      </div>
-
-      <div class="gc pc rv d2" data-type="fs">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">06</div><div class="pc-name">MediTrack — Healthcare Dashboard</div><div class="pc-desc">HIPAA-compliant healthcare system with patient records, appointment scheduling, telemedicine via WebRTC, and AI-assisted diagnosis.</div><div class="pc-stack"><span>React</span><span>Express</span><span>PostgreSQL</span><span>WebRTC</span><span>JWT</span></div></div>
-      </div>
-
-      <div class="gc pc rv" data-type="ai">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span><span class="ptag tnew">New</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">07</div><div class="pc-name">AutoCode — AI Code Generator</div><div class="pc-desc">Intelligent coding assistant generating and refactoring code from natural language. VSCode extension supporting 20+ programming languages.</div><div class="pc-stack"><span>GPT-4</span><span>LangChain</span><span>VSCode API</span><span>Node.js</span><span>Redis</span></div></div>
-      </div>
-
-      <div class="gc pc rv d1" data-type="fs">
-        <div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div>
-        <div class="pc-body"><div class="pc-num">08</div><div class="pc-name">FinanceFlow — Fintech Dashboard</div><div class="pc-desc">Personal finance platform with AI expense categorization, LSTM-based budget forecasting, Plaid integration, and bank-grade encryption.</div><div class="pc-stack"><span>React</span><span>Python</span><span>Plaid API</span><span>LSTM</span><span>MongoDB</span></div></div>
-      </div>
-
+      <div class="gc pc rv" data-type="ai"><div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span><span class="ptag tnew">New</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">01</div><div class="pc-name">NeuralChat — AI Conversation Engine</div><div class="pc-desc">GPT-4 powered chatbot with long-term memory, context compression, and real-time streaming. RAG pipelines for domain-specific knowledge bases.</div><div class="pc-stack"><span>LangChain</span><span>OpenAI</span><span>FastAPI</span><span>Pinecone</span><span>React</span></div></div></div>
+      <div class="gc pc rv d1" data-type="fs"><div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">02</div><div class="pc-name">DevFlow — SaaS Project Manager</div><div class="pc-desc">Full-featured project management SaaS with Kanban boards, real-time WebSocket collaboration, OAuth authentication, and Stripe billing.</div><div class="pc-stack"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Stripe</span><span>Prisma</span></div></div></div>
+      <div class="gc pc rv d2" data-type="ai"><div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">03</div><div class="pc-name">VisionAI — Image Analysis Platform</div><div class="pc-desc">Computer vision platform using CNN models for object detection and defect analysis. Scalable FastAPI backend with React analytics dashboard.</div><div class="pc-stack"><span>TensorFlow</span><span>OpenCV</span><span>FastAPI</span><span>React</span><span>AWS S3</span></div></div></div>
+      <div class="gc pc rv" data-type="fs"><div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span><span class="ptag tnew">New</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">04</div><div class="pc-name">ShopSmart — E-Commerce Platform</div><div class="pc-desc">High-performance e-commerce with AI-powered recommendations, dynamic pricing engine, and real-time inventory tracking at scale.</div><div class="pc-stack"><span>Next.js</span><span>Node.js</span><span>MongoDB</span><span>Redis</span><span>Docker</span></div></div></div>
+      <div class="gc pc rv d1" data-type="ai"><div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">05</div><div class="pc-name">SentimentPulse — NLP Analytics</div><div class="pc-desc">Real-time sentiment analysis processing social feeds using fine-tuned BERT. Dashboard with live trend visualization and intelligent alerting.</div><div class="pc-stack"><span>HuggingFace</span><span>BERT</span><span>Kafka</span><span>Python</span><span>D3.js</span></div></div></div>
+      <div class="gc pc rv d2" data-type="fs"><div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">06</div><div class="pc-name">MediTrack — Healthcare Dashboard</div><div class="pc-desc">HIPAA-compliant healthcare system with patient records, appointment scheduling, telemedicine via WebRTC, and AI-assisted diagnosis.</div><div class="pc-stack"><span>React</span><span>Express</span><span>PostgreSQL</span><span>WebRTC</span><span>JWT</span></div></div></div>
+      <div class="gc pc rv" data-type="ai"><div class="pc-top"><div class="p-tags"><span class="ptag tai">AI / ML</span><span class="ptag tnew">New</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">07</div><div class="pc-name">AutoCode — AI Code Generator</div><div class="pc-desc">Intelligent coding assistant generating and refactoring code from natural language. VSCode extension supporting 20+ programming languages.</div><div class="pc-stack"><span>GPT-4</span><span>LangChain</span><span>VSCode API</span><span>Node.js</span><span>Redis</span></div></div></div>
+      <div class="gc pc rv d1" data-type="fs"><div class="pc-top"><div class="p-tags"><span class="ptag tfs">Full Stack</span></div><div class="p-links"><a href="#" class="pib">↗</a><a href="#" class="pib">⬡</a></div></div><div class="pc-body"><div class="pc-num">08</div><div class="pc-name">FinanceFlow — Fintech Dashboard</div><div class="pc-desc">Personal finance platform with AI expense categorization, LSTM-based budget forecasting, Plaid integration, and bank-grade encryption.</div><div class="pc-stack"><span>React</span><span>Python</span><span>Plaid API</span><span>LSTM</span><span>MongoDB</span></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- Certificates -->
 <section id="certificates">
   <div class="wrap">
     <div class="rv"><div class="sec-pill">✦ Credentials</div></div>
     <div class="rv"><h2 class="sec-title">Certifications</h2><p class="sec-sub">Industry-recognized certifications in AI, cloud, and engineering.</p></div>
     <div class="cg">
-
-      <div class="gc cc rv">
-        <div class="cc-top ct1"><div class="c-emoji">🎓</div><span class="c-logo cl1">Google Cloud</span></div>
-        <div class="cc-body"><div class="c-issuer">Google Cloud Platform</div><div class="c-name">Professional Machine Learning Engineer</div><div class="c-desc">Validates the ability to design, build, and productionize ML models using Vertex AI, BigQuery ML, and GCP's data ecosystem.</div><div class="c-foot"><span class="c-date">📅 2024 · Placeholder</span><a href="#" class="c-link">Verify ↗</a></div></div>
-      </div>
-
-      <div class="gc cc rv d1">
-        <div class="cc-top ct2"><div class="c-emoji">🏆</div><span class="c-logo cl2">Coursera</span></div>
-        <div class="cc-body"><div class="c-issuer">DeepLearning.AI · Coursera</div><div class="c-name">Deep Learning Specialization</div><div class="c-desc">5-course program covering neural networks, CNNs, RNNs, sequence models, and best practices for structuring machine learning projects.</div><div class="c-foot"><span class="c-date">📅 2023 · Placeholder</span><a href="#" class="c-link">Verify ↗</a></div></div>
-      </div>
-
-      <div class="gc cc rv d2">
-        <div class="cc-top ct3"><div class="c-emoji">⚡</div><span class="c-logo cl3">AWS</span></div>
-        <div class="cc-body"><div class="c-issuer">Amazon Web Services</div><div class="c-name">AWS Certified Developer — Associate</div><div class="c-desc">Demonstrates proficiency in developing and deploying cloud applications on AWS using Lambda, DynamoDB, API Gateway, and CI/CD pipelines.</div><div class="c-foot"><span class="c-date">📅 2024 · Placeholder</span><a href="#" class="c-link">Verify ↗</a></div></div>
-      </div>
-
+      <div class="gc cc rv"><div class="cc-top ct1"><div class="c-emoji">🎓</div><span class="c-logo cl1">Google Cloud</span></div><div class="cc-body"><div class="c-issuer">Google Cloud Platform</div><div class="c-name">Professional Machine Learning Engineer</div><div class="c-desc">Validates the ability to design, build, and productionize ML models using Vertex AI, BigQuery ML, and GCP's data ecosystem.</div><div class="c-foot"><span class="c-date">📅 2024 · Placeholder</span><a href="#" class="c-link">Verify ↗</a></div></div></div>
+      <div class="gc cc rv d1"><div class="cc-top ct2"><div class="c-emoji">🏆</div><span class="c-logo cl2">Coursera</span></div><div class="cc-body"><div class="c-issuer">DeepLearning.AI · Coursera</div><div class="c-name">Deep Learning Specialization</div><div class="c-desc">5-course program covering neural networks, CNNs, RNNs, sequence models, and best practices for structuring machine learning projects.</div><div class="c-foot"><span class="c-date">📅 2023 · Placeholder</span><a href="#" class="c-link">Verify ↗</a></div></div></div>
+      <div class="gc cc rv d2"><div class="cc-top ct3"><div class="c-emoji">⚡</div><span class="c-logo cl3">AWS</span></div><div class="cc-body"><div class="c-issuer">Amazon Web Services</div><div class="c-name">AWS Certified Developer — Associate</div><div class="c-desc">Demonstrates proficiency in developing and deploying cloud applications on AWS using Lambda, DynamoDB, API Gateway, and CI/CD pipelines.</div><div class="c-foot"><span class="c-date">📅 2024 · Placeholder</span><a href="#" class="c-link">Verify ↗</a></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- Skills -->
 <section id="skills">
   <div class="wrap">
     <div class="rv"><div class="sec-pill">✦ Expertise</div></div>
@@ -408,7 +402,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   </div>
 </section>
 
-<!-- Contact -->
 <section id="contact">
   <div class="wrap">
     <div class="rv"><div class="sec-pill">✦ Contact</div></div>
@@ -436,7 +429,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <div class="wrap" style="width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
     <a href="#" class="fl">Mubasher.dev</a>
@@ -450,26 +442,26 @@ footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,
 </footer>
 
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in'); }), {threshold:0.1});
+// Optimized scroll reveal with Intersection Observer (performance)
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in'); }), { threshold: 0.12, rootMargin: "0px 0px -20px 0px" });
 document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-// Counters
+// Counters with animation optimization
 const co = new IntersectionObserver(e => {
   e.forEach(x => {
     if(!x.isIntersecting) return;
     x.target.querySelectorAll('.sn[data-t]').forEach(el => {
-      const t = +el.dataset.t, dur = 1000, st = 16, inc = t/(dur/st);
+      const t = +el.dataset.t, dur = 900, st = 16, inc = t/(dur/st);
       let v = 0;
       const iv = setInterval(() => { v = Math.min(v+inc, t); el.textContent = Math.floor(v)+'+'; if(v>=t) clearInterval(iv); }, st);
     });
     co.unobserve(x.target);
   });
-}, {threshold:0.5});
+}, { threshold: 0.4 });
 const hs = document.querySelector('.hero-stats');
 if(hs) co.observe(hs);
 
-// Filter
+// Filter function - preserved
 function fp(type, btn) {
   document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -478,24 +470,24 @@ function fp(type, btn) {
   });
 }
 
-// Send
+// Send button with smooth feedback
 function send() {
   const btn = document.getElementById('sb');
-  btn.textContent = 'Sending…'; btn.style.opacity = '0.6';
+  btn.textContent = 'Sending…'; btn.style.opacity = '0.6'; btn.disabled = true;
   setTimeout(() => {
     btn.textContent = 'Sent ✓'; btn.style.background = '#2dd4bf'; btn.style.color = '#0a0a0f'; btn.style.opacity = '1';
-    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
-  }, 1400);
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 2800);
+  }, 800);
 }
 
-// Active nav
 const secs = document.querySelectorAll('section[id]');
 const nls = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
   let cur = '';
-  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 130) cur = s.id; });
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 140) cur = s.id; });
   nls.forEach(a => { a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--text)' : ''; });
-}, {passive:true});
+}, { passive: true });
+document.querySelectorAll('.pc').forEach(c => c.style.display = 'flex');
 </script>
 </body>
 </html>
