@@ -480,6 +480,7 @@ function send() {
   }, 800);
 }
 
+// Active nav on scroll - smooth
 const secs = document.querySelectorAll('section[id]');
 const nls = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
@@ -487,6 +488,8 @@ window.addEventListener('scroll', () => {
   secs.forEach(s => { if(window.scrollY >= s.offsetTop - 140) cur = s.id; });
   nls.forEach(a => { a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--text)' : ''; });
 }, { passive: true });
+
+// Initial filter to show all projects
 document.querySelectorAll('.pc').forEach(c => c.style.display = 'flex');
 </script>
 </body>
